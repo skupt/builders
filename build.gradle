@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com'
+            artifactId = 'builders'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "$rootProject.buildDir/m2repo"
+        }
+    }
+}
+
+allprojects {
+    version = '1.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    dependencies {
+        testImplementation 'junit:junit:4.13.1'
+    }
+    repositories {
+        mavenCentral()
+    }
+}

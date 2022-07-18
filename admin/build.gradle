@@ -1,0 +1,28 @@
+plugins {
+    id 'application'
+    id 'maven-publish'
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.builders'
+            artifactId = 'admin'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "$rootProject.buildDir/m2repo"
+        }
+    }
+}
+
+
+application {
+    mainClass = 'com.builders.admin.AdminEntryPoint'
+}
+
+dependencies {
+    implementation project(':utils')
+    implementation project(':services')
+}

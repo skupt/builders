@@ -1,0 +1,25 @@
+plugins {
+    id 'war'
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.builders'
+            artifactId = 'web'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "$rootProject.buildDir/m2repo"
+        }
+    }
+}
+
+dependencies {
+    implementation project(':utils')
+    implementation project(':services')
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+}
